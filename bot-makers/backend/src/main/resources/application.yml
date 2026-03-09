@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: auth-rbac-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/auth_rbac_db
+    username: root
+    # FIX: Change this to your actual MySQL password
+    password: Mousumi121
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      # FIX: was create-drop (deletes DB on shutdown). Use update to persist data.
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: false
+    open-in-view: false
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: MySecretKeyForAuthenticationSystemThatMustBeAtLeast256BitsLongForHS256Algorithm
+    expiration: 86400000
+
+logging:
+  level:
+    root: INFO
+    com.example.auth: DEBUG
+    org.springframework.security: INFO
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
